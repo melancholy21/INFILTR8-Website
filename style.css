@@ -89,6 +89,7 @@ i.far {
   padding: 20px 5%;
 }
 
+
 /* Sticky Navigation Bar */
 .glass-nav {
   display: flex;
@@ -342,7 +343,6 @@ nav .fas {
   border-radius: 12px;
   font-size: 0.8rem;
   font-weight: 600;
-  margin-left: 8px;
 }
 
 /* Section Titles */
@@ -591,7 +591,8 @@ nav .fas {
 
 /* About & Specs Tabs */
 #about {
-  padding: 60px 0;
+  padding-top: 60px;
+  padding-bottom: 60px;
 }
 
 .about-row {
@@ -751,7 +752,115 @@ nav .fas {
   font-weight: 600;
 }
 
-/* Video Wrapper */
+/* ========================
+   Video Showcase (Highlight)
+   ======================== */
+.video-showcase {
+  position: relative;
+  padding: 100px 0 120px;
+  overflow: hidden;
+}
+
+/* Atmospheric gradient background */
+.video-showcase-bg {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 40%, rgba(139, 92, 246, 0.12) 0%, transparent 70%),
+    radial-gradient(ellipse 60% 50% at 20% 80%, rgba(139, 92, 246, 0.06) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 50% at 80% 20%, rgba(139, 92, 246, 0.06) 0%, transparent 60%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.video-showcase > .container {
+  position: relative;
+  z-index: 1;
+}
+
+/* Showcase Header */
+.video-showcase-header {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.video-showcase-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--primary);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  background: rgba(139, 92, 246, 0.08);
+  border: 1px solid rgba(139, 92, 246, 0.2);
+  padding: 6px 18px;
+  border-radius: 20px;
+  margin-bottom: 20px;
+}
+
+.video-showcase-label i {
+  font-size: 0.7rem;
+}
+
+.video-showcase-title {
+  font-family: var(--font-title);
+  font-size: 3.2rem;
+  font-weight: 500;
+  color: #fff;
+  letter-spacing: 0.5px;
+  line-height: 1.15;
+  margin-bottom: 18px;
+}
+
+.video-showcase-title span {
+  color: var(--primary);
+}
+
+.video-showcase-desc {
+  font-size: 1.1rem;
+  color: var(--text-muted);
+  max-width: 620px;
+  margin: 0 auto;
+  line-height: 1.7;
+}
+
+/* Hero Video Card — Elevated, cinematic framing */
+.video-card-hero {
+  background: var(--bg-card);
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  border-top: 3px solid var(--primary);
+  border-left: 1px solid rgba(139, 92, 246, 0.15);
+  border-right: 1px solid rgba(139, 92, 246, 0.15);
+  border-bottom: 1px solid rgba(139, 92, 246, 0.15);
+  border-radius: 12px;
+  padding: 12px;
+  box-shadow:
+    0 20px 60px rgba(0, 0, 0, 0.5),
+    0 0 80px rgba(139, 92, 246, 0.12),
+    0 0 120px rgba(139, 92, 246, 0.06);
+  transition: box-shadow 0.4s ease, transform 0.4s ease;
+}
+
+.video-card-hero:hover {
+  box-shadow:
+    0 25px 70px rgba(0, 0, 0, 0.6),
+    0 0 100px rgba(139, 92, 246, 0.2),
+    0 0 150px rgba(139, 92, 246, 0.1);
+  transform: translateY(-4px);
+}
+
+.video-card-hero video {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 8px;
+}
+
+/* Legacy video-card (kept for any other usage) */
 .video-card {
   background: var(--bg-card);
   backdrop-filter: blur(16px) saturate(180%);
@@ -1295,13 +1404,23 @@ form button.btn {
   color: var(--primary);
 }
 
-/* Symmetrical Mobile Adjustments & Responsive Styles */
+/* ====================================================
+   RESPONSIVE STYLES — Inspired by Among Us Mobile UX
+   ==================================================== */
+
+/* ---- Tablet Breakpoint (≤991px) ---- */
 @media only screen and (max-width: 991px) {
+
+  /* Hero: stack vertically, mascot above text */
   .header-content {
     grid-template-columns: 1fr;
     text-align: center;
-    gap: 30px;
-    padding-top: 70px;
+    gap: 25px;
+    padding-top: 50px;
+  }
+
+  .hero-mascot-wrapper {
+    order: -1; /* Mascot first on mobile, like Among Us hero */
   }
 
   .header-text {
@@ -1312,20 +1431,21 @@ form button.btn {
   }
 
   .header-text h1 {
-    font-size: 3.2rem;
+    font-size: 3rem;
   }
 
   .hero-buttons {
     justify-content: center;
   }
 
+  /* About: stack, center image */
   .about-row {
     grid-template-columns: 1fr;
     gap: 30px;
   }
 
   .about-img-wrapper {
-    max-width: 320px;
+    max-width: 280px;
     margin: 0 auto;
   }
 
@@ -1338,58 +1458,97 @@ form button.btn {
     justify-content: center;
     margin-bottom: 20px;
   }
+
+  /* Tab controls center */
+  .tab-titles {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* Download cards: 2 columns like Among Us store badges */
+  .card-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+
+  /* Devs: 2 columns like Among Us screenshot grid */
+  .dev-card-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+
+  /* Gallery: keep 2-column on tablets */
+  .photos-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
 }
 
+/* ---- Mobile Nav Breakpoint (≤768px) ---- */
 @media only screen and (max-width: 768px) {
+
+  /* Hamburger visible */
   nav .fas {
     display: block;
   }
 
+  /* Slide-in side panel with backdrop blur — Among Us style */
   nav ul {
-    background: var(--bg-nav);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+    background: rgba(10, 8, 16, 0.96);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
     position: fixed;
     top: 0;
-    right: -240px;
-    width: 240px;
+    right: -280px;
+    width: 280px;
     height: 100vh;
-    padding: 80px 20px 20px;
+    height: 100dvh; /* Modern dynamic viewport height */
+    padding: 90px 28px 40px;
     flex-direction: column;
     align-items: flex-start;
     justify-content: flex-start;
+    gap: 4px;
     z-index: 101;
-    transition: right 0.4s ease;
-    border-left: 1px solid #1c192e;
+    transition: right 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    border-left: 1px solid rgba(139, 92, 246, 0.15);
+    box-shadow: -10px 0 40px rgba(0, 0, 0, 0.5);
   }
 
   nav ul li {
-    margin: 12px 0;
+    margin: 0;
     width: 100%;
   }
 
   nav ul li a {
     width: 100%;
     display: block;
+    padding: 14px 16px; /* Bigger touch targets — among us style */
+    font-size: 1.15rem;
+    border-radius: 8px;
+    transition: background 0.2s ease;
+  }
+
+  nav ul li a:hover,
+  nav ul li a:active {
+    background: rgba(139, 92, 246, 0.1);
+    color: var(--primary);
   }
 
   nav ul .fas {
     position: absolute;
-    top: 25px;
-    right: 25px;
+    top: 28px;
+    right: 28px;
+    font-size: 1.5rem;
+    padding: 8px;
   }
 
-  .specs-wrapper {
-    grid-template-columns: 1fr;
-    gap: 15px;
-  }
-
+  /* Section dividers */
   .section-divider {
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
-    margin: 45px 0 25px;
-    padding: 0 20px; /* Explicit side padding to keep it away from screen edge */
+    margin: 50px 0 25px;
+    padding: 0;
   }
 
   .section-divider span:not(.section-badge) {
@@ -1399,111 +1558,243 @@ form button.btn {
   .section-badge {
     font-size: 0.75rem;
     padding: 2px 8px;
-    margin-left: 0;
   }
-}
 
-@media only screen and (max-width: 580px) {
-  .container {
-    padding: 20px 20px; /* Ensures text and components never touch screen edges */
+  .specs-wrapper {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+
+  /* Hero height: full viewport like Among Us hero */
+  #header {
+    min-height: 100vh;
+    min-height: 100dvh;
+  }
+
+  .header-content {
+    padding-top: 30px;
   }
 
   .header-text h1 {
-    font-size: 2.4rem;
-    line-height: 1.2;
+    font-size: 2.6rem;
+    line-height: 1.15;
   }
 
   .hero-tagline {
-    font-size: 0.8rem;
+    font-size: 0.82rem;
+  }
+
+  /* About section: generous padding */
+  #about {
+    padding-top: 50px;
+    padding-bottom: 50px;
+  }
+
+  .about-img-wrapper {
+    max-width: 220px;
+  }
+
+  /* Video showcase: tighter on tablet */
+  .video-showcase {
+    padding: 70px 0 80px;
+  }
+
+  .video-showcase-title {
+    font-size: 2.4rem;
+  }
+
+  .video-showcase-desc {
+    font-size: 1rem;
     padding: 0 10px;
+  }
+
+  .video-showcase-header {
+    margin-bottom: 35px;
+  }
+
+  .video-card-hero {
+    padding: 10px;
+  }
+}
+
+/* ---- Small Mobile Breakpoint (≤580px) ---- */
+@media only screen and (max-width: 580px) {
+
+  /* Container padding — comfortable margins like Among Us mobile */
+  .container {
+    padding: 16px 20px;
+  }
+
+  /* Hero section: full viewport, centered vertically */
+  #header {
+    min-height: 100vh;
+    min-height: 100dvh;
+    padding-top: 80px;
+  }
+
+  .header-content {
+    gap: 20px;
+    padding-top: 10px;
+  }
+
+  .header-text h1 {
+    font-size: 2.2rem;
+    line-height: 1.2;
+    margin-bottom: 12px;
+  }
+
+  .hero-tagline {
+    font-size: 0.78rem;
+    padding: 0;
+    letter-spacing: 1.5px;
   }
 
   .hero-buttons {
     flex-direction: column;
     width: 100%;
-    gap: 12px;
-    padding: 0 10px;
+    gap: 10px;
+    padding: 0;
   }
 
   .hero-buttons .btn {
     width: 100%;
     justify-content: center;
-    padding: 12px 20px;
+    padding: 14px 20px; /* Bigger touch targets */
+    font-size: 0.9rem;
   }
 
   .hero-mascot {
-    width: 200px;
-    height: 200px;
+    width: 180px;
+    height: 180px;
   }
 
+  /* About section */
   .about-text {
-    padding: 0 5px;
+    padding: 0;
     line-height: 1.7;
   }
 
   .about-text p {
-    font-size: 0.95rem;
+    font-size: 0.93rem;
     margin-bottom: 15px;
   }
 
   .about-img-wrapper {
-    max-width: 240px;
-    margin: 0 auto 15px;
-    width: 90%;
+    max-width: 200px;
+    margin: 0 auto 10px;
+    width: 85%;
   }
 
+  /* Tabs: full width, evenly split — like Among Us toggle sections */
   .tab-titles {
     display: flex;
     width: 100%;
-    gap: 8px;
+    gap: 6px;
     background: #110f1c;
     padding: 4px;
-    border-radius: 6px;
+    border-radius: 8px;
     margin: 20px 0;
   }
 
   .tab-links {
     flex: 1;
     text-align: center;
-    font-size: 0.85rem;
-    padding: 10px 8px;
+    font-size: 0.82rem;
+    padding: 10px 6px;
+    border-radius: 6px;
   }
 
   .spec-list li {
     flex-direction: column;
     align-items: flex-start;
     gap: 4px;
-    padding: 8px 12px;
-    font-size: 0.9rem;
+    padding: 10px 14px;
+    font-size: 0.88rem;
   }
 
   /* Section dividers compact */
   .section-divider {
     flex-wrap: wrap;
     gap: 8px;
-    margin: 40px 0 20px;
+    margin: 35px 0 18px;
   }
 
   .section-divider span:not(.section-badge) {
-    font-size: 1.1rem;
+    font-size: 1.05rem;
   }
 
   .section-badge {
     font-size: 0.72rem;
     padding: 2px 6px;
-    margin-left: 0;
   }
 
-  .card-grid,
-  .photos-grid,
-  .dev-card-grid {
+  /* Gallery: 2-column grid — Among Us uses 2-col for screenshots on mobile */
+  .photos-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+
+  .photo-item {
+    padding: 6px;
+    aspect-ratio: 16/10;
+  }
+
+  /* Download cards: single column on small screens */
+  .card-grid {
     grid-template-columns: 1fr;
-    gap: 20px;
+    gap: 16px;
+  }
+
+  .dn-card {
+    min-height: auto;
+    padding: 20px;
+  }
+
+  /* Devs: 2-column compact grid — Among Us style */
+  .dev-card-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  .dev-card {
+    padding: 16px 12px;
+  }
+
+  .dev-card img {
+    width: 80px;
+    height: 80px;
+    margin-bottom: 10px;
+  }
+
+  .dev-name {
+    font-size: 1.15rem;
+  }
+
+  .dev-role {
+    font-size: 0.75rem;
+    margin-bottom: 10px;
+  }
+
+  .dev-bio {
+    font-size: 0.8rem;
+    margin-bottom: 14px;
+    line-height: 1.5;
+  }
+
+  .dev-number {
+    font-size: 0.9rem;
+    top: 10px;
+    right: 12px;
+  }
+
+  /* Form */
+  .form-panel {
+    padding: 20px 16px;
   }
 
   .form-grid {
     grid-template-columns: 1fr;
-    gap: 15px;
+    gap: 14px;
   }
 
   .form-grid input,
@@ -1511,10 +1802,118 @@ form button.btn {
   .form-grid textarea {
     grid-column: span 1;
     padding: 12px 16px;
+    font-size: 0.9rem;
   }
 
   form button.btn {
     grid-column: span 1;
-    padding: 12px;
+    padding: 14px;
+    font-size: 0.9rem;
+  }
+
+  .sub-title {
+    font-size: 1.8rem;
+    margin-bottom: 18px;
+  }
+
+  /* Footer adjustments */
+  .social-follow-section {
+    margin-top: 40px;
+  }
+
+  .social-follow-section h3 {
+    font-size: 1.5rem;
+  }
+
+  .social-follow-section .social-icons {
+    gap: 20px;
+  }
+
+  .social-follow-section .social-icons a {
+    font-size: 1.7rem;
+  }
+
+  .copyright {
+    margin-top: 40px;
+    padding: 20px 0;
+    font-size: 0.82rem;
+  }
+
+  /* Gallery pagination touch-friendly */
+  .page-btn, .page-num-btn {
+    padding: 10px 14px;
+    font-size: 0.85rem;
+    min-width: 42px;
+    min-height: 42px;
+  }
+
+  .gallery-pagination {
+    gap: 10px;
+    margin-top: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  /* Video showcase: compact on mobile */
+  .video-showcase {
+    padding: 50px 0 60px;
+  }
+
+  .video-showcase-title {
+    font-size: 1.8rem;
+  }
+
+  .video-showcase-desc {
+    font-size: 0.9rem;
+  }
+
+  .video-showcase-label {
+    font-size: 0.75rem;
+    padding: 5px 14px;
+    letter-spacing: 1.5px;
+  }
+
+  .video-showcase-header {
+    margin-bottom: 25px;
+  }
+
+  .video-card-hero {
+    padding: 8px;
+    border-radius: 8px;
+  }
+}
+
+/* ---- Extra Small Mobile (≤400px) ---- */
+@media only screen and (max-width: 400px) {
+
+  .header-text h1 {
+    font-size: 1.9rem;
+  }
+
+  .hero-mascot {
+    width: 150px;
+    height: 150px;
+  }
+
+  .dev-card-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+
+  .dev-card img {
+    width: 64px;
+    height: 64px;
+  }
+
+  .dev-name {
+    font-size: 1rem;
+  }
+
+  .dev-bio {
+    font-size: 0.75rem;
+  }
+
+  .photos-grid {
+    gap: 8px;
   }
 }

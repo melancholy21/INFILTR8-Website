@@ -22,7 +22,7 @@ function openmenu() {
   sidemenu.style.right = "0";
 }
 function closemenu() {
-  sidemenu.style.right = "-240px";
+  sidemenu.style.right = "-280px";
 }
 
 // Web3Forms AJAX form submit handler with Glassmorphic Toast Notifications
