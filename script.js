@@ -354,3 +354,17 @@ document.addEventListener("DOMContentLoaded", () => {
   resize();
   animate();
 })();
+
+// Back to Top button scroll-visibility handler
+document.addEventListener("DOMContentLoaded", () => {
+  const backToTopBtn = document.getElementById("back-to-top");
+  if (backToTopBtn) {
+    window.addEventListener("scroll", () => {
+      if (window.scrollY > 300) {
+        backToTopBtn.classList.add("show");
+      } else {
+        backToTopBtn.classList.remove("show");
+      }
+    });
+  }
+});
